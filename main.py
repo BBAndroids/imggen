@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import sys, os, utils, bb, gpt, mct
+import sys, os, pkgutil, utils, bb, gpt, mct
 
 if not len(sys.argv) == 5:
 	print 'usage:', sys.argv[0], '<input boot0> <input user> <output boot1> <output user>'
@@ -16,14 +16,14 @@ variant = bb.hwid_to_variant(build_info['hwid'])
 secure = build_info['secure']
 
 print 'Parsing reversion info...'
-rev_table =  bb.parse_rev_table(bb10_boot[build_info['rev_table_offset']:build_info['rev_table_offset'] + build_info['rev_table_size']])
+rev_table =  bb.parse_rev_table(utils.buffer_read(bb10_boot, build_info['rev_table_offset'], build_info['rev_table_size']))
 pcb_rev = rev_table['pcb_rev']
 pop_rev = rev_table['pop_rev']
 real_rev = pcb_rev
 if product == "wolverine":
 	real_rev = bb.wolverine_pcb_rev_to_real_rev(variant, pcb_rev)
 
-print '\tproduct:', product, '(' + hex(build_info['hwid']) + ')'
+print '\tproduct:', product, '(' + utils.hex(build_info['hwid']) + ')'
 print '\tvariant:', variant
 print '\tsecure:', secure
 print '\tpcb_rev:', pcb_rev
@@ -93,10 +93,10 @@ user_file_list = {
 	'rpm':			(False, 'files/rpm.mbn'),
 	'tz':			(False, 'files/tz.mbn'),
 	'sdi':			(False, 'files/sdi.mbn'),
-	'blog':		    (False, 'files/blog.img'),
+	'blog':			(False, 'files/blog.img'),
 	'boardid':		(False, 'files/boardid.img'),
 	'nvuser':		(False, 'files/nvuser.img'),
-	'perm':		    (False, 'files/perm.img'),
+	'perm':			(False, 'files/perm.img'),
 	'prdid':		(False, 'files/prdid.img'),
 }
 

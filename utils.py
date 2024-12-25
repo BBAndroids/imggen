@@ -40,3 +40,6 @@ def get_padding(buf, new_size):
 def buffer_write(buf, offset, value):
 	buf += get_padding(buf, offset)
 	return buf[:offset] + value + buf[offset + len(value):]
+    
+def hex(num):
+    return "0x{num:x}".format(num = num)

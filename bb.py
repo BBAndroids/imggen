@@ -1,4 +1,4 @@
-import struct, sys
+import struct, sys, utils
 from collections import OrderedDict
 
 _BUILD_INFO_FORMAT = "<II4sI64s16s16s12sIIIIIIIIIIIIIIIIIIIIII40s1024s"
@@ -26,7 +26,7 @@ def generate_hwi(product, variant, pcb_rev, pop_rev):
 		chksum = _update_checksum(chksum, hwi_entries[key])
 
 	hwi += '\n# The checksum gets added at the end of the file by hwi_validate\n'
-	hwi += 'chksum = ' + hex(chksum) + '\n'
+	hwi += 'chksum = ' + utils.hex(chksum) + '\n'
 
 	return hwi
 
@@ -69,7 +69,7 @@ def hwid_to_product(hwid):
 	if hwid == 0x8d002c0a or hwid == 0x8e002c0a or hwid == 0x8f002c0a:
 		return "oslo"
 	# keian ?
-	raise Exception("unknown hwid: " + hex(hwid))
+	raise Exception("unknown hwid: " + utils.hex(hwid))
 
 def hwid_to_variant(hwid):
 	if hwid == 0x84002c0a: # SQW100-3
@@ -84,7 +84,7 @@ def hwid_to_variant(hwid):
 		return "wichita"
 	if hwid == 0x8d002c0a or hwid == 0x8e002c0a or hwid == 0x8f002c0a: # SQW100-4
 		return "row"
-	raise Exception("unknown hwid: " + hex(hwid))
+	raise Exception("unknown hwid: " + utils.hex(hwid))
 
 wolverine_na_table = {
 	6: 3,
