@@ -65,18 +65,22 @@ def parse_rev_table(rev_table):
 
 def hwid_to_product(hwid):
 	if hwid == 0x84002c0a or hwid == 0x85002c0a or hwid == 0x86002c0a or hwid == 0x87002c0a or hwid == 0x8c002c0a:
-		return "wolverine"
+		return "wolverine" # called windermere in BB10
 	if hwid == 0x8d002c0a or hwid == 0x8e002c0a or hwid == 0x8f002c0a:
-		return "oslo"
+		return "oslo" # called windermere2, windermere3 and windermere4 in BB10
+	if hwid == 0xb400240a or hwid == 0xb600240a or hwid == 0xb700240a or hwid == 0xbc00240a or hwid == 0xae00240a or hwid == 0xaf00240a:
+		return "mockingbird" # called ontario in BB10
+	if hwid == 0xa400080a:
+		return "devalphax"
 	# keian ?
 	raise Exception("unknown hwid: " + utils.hex(hwid))
 
 def hwid_to_variant(hwid):
-	if hwid == 0x84002c0a: # SQW100-3
+	if hwid == 0x84002c0a or hwid == 0xae00240a: # SQW100-3
 		return "na"
-	if hwid == 0x85002c0a: # SQW100-2
+	if hwid == 0x85002c0a or hwid == 0xaf00240a: # SQW100-2
 		return "vzw"
-	if hwid == 0x86002c0a:
+	if hwid == 0x86002c0a or hwid == 0xb400240a:
 		return "sprint"
 	if hwid == 0x87002c0a: # SQW100-1
 		return "emea"
@@ -84,6 +88,12 @@ def hwid_to_variant(hwid):
 		return "wichita"
 	if hwid == 0x8d002c0a or hwid == 0x8e002c0a or hwid == 0x8f002c0a: # SQW100-4
 		return "row"
+	if hwid == 0xa400080a:
+		return ""
+	if hwid == 0xb600240a:
+		return "fdd"
+	if hwid == 0xbc00240a:
+		return "tdd"
 	raise Exception("unknown hwid: " + utils.hex(hwid))
 
 wolverine_na_table = {
