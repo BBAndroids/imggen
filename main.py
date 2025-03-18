@@ -3,7 +3,7 @@
 import sys, os, pkgutil, utils, bb, gpt, mct
 
 if not len(sys.argv) == 5:
-	print 'usage:', sys.argv[0], '<input boot0> <input user> <output boot1> <output user>'
+	print 'usage:', sys.argv[0], '<input boot0> <input user> <output boot0> <output user>'
 	sys.exit(0)
 
 print 'Finding build info...'
