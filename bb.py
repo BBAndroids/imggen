@@ -128,10 +128,10 @@ def wolverine_pcb_rev_to_real_rev(variant, rev):
 	table = None
 	if variant == "na":
 		table = wolverine_na_table
-	if variant == 0x85002c0a:
-		table = "vzw"
-	if variant == 0x87002c0a:
-		table = "emea"
+	if variant == "vzw":
+		table = wolverine_vzw_table
+	if variant == "emea":
+		table = wolverine_emea_table
 	if table == None:
 		return rev
 	if rev in table:
